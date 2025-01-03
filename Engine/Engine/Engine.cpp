@@ -1,25 +1,44 @@
+#include "PreCompiledHeader.h"
+
 #include "Engine.h"
 #include <Windows.h>
 #include <iostream>
 
+#include "Level/Level.h"
+
+// 스태틱 변수 초기화.
+Engine* Engine::instance = nullptr;
+
 Engine::Engine()
-	: quit(false)
+	: quit(false), mainLevel(nullptr)
 {
+	// 싱글톤 객체 설정.
+	instance = this;
 }
 
 Engine::~Engine()
 {
+	// 메인 레벨 메모리 해제.
+	if (mainLevel != nullptr)
+	{
+		delete mainLevel;
+	}
 }
 
 void Engine::Run()
 {
 	// 시작 타임 스탬프 저장.
+	// timeGetTime 함수는 밀리세컨드(1/1000초) 단위.
 	//unsigned long currentTime = timeGetTime();
 	//unsigned long previousTime = 0;
 
 	// CPU 시계 사용.
+	// 시스템 시계 -> 고해상도 카운터. (10000000).
+	// 메인보드에 시계가 있음.
 	LARGE_INTEGER frequency;
 	QueryPerformanceFrequency(&frequency);
+
+	//std::cout << "Frequency: " << frequency.QuadPart << "\n";
 
 	// 시작 시간 및 이전 시간을 위한 변수.
 	LARGE_INTEGER time;
@@ -28,9 +47,8 @@ void Engine::Run()
 	int64_t currentTime = time.QuadPart;
 	int64_t previousTime = 0;
 
-
 	// 프레임 제한.
-	float targetFrameRate = 60.0f;
+	float targetFrameRate = 90.0f;
 
 	// 한 프레임 시간 계산.
 	float targetOneFrameTime = 1.0f / targetFrameRate;
@@ -73,6 +91,14 @@ void Engine::Run()
 	}
 }
 
+void Engine::LoadLevel(Level* newLevel)
+{
+	// 기존 레벨이 있다면 삭제 후 교체.
+
+	// 메인 레벨 설정.
+	mainLevel = newLevel;
+}
+
 bool Engine::GetKey(int key)
 {
 	return keyState[key].isKeyDown;
@@ -94,6 +120,12 @@ void Engine::QuitGame()
 	quit = true;
 }
 
+Engine& Engine::Get()
+{
+	// 싱글톤 객체 반환.
+	return *instance;
+}
+
 void Engine::ProcessInput()
 {
 	for (int ix = 0; ix < 255; ++ix)
@@ -104,17 +136,20 @@ void Engine::ProcessInput()
 
 void Engine::Update(float deltaTime)
 {
-	// ESC키로 게임 종료.
-	if (GetKeyDown(VK_ESCAPE))
+	// 레벨 업데이트.
+	if (mainLevel != nullptr)
 	{
-		QuitGame();
+		mainLevel->Update(deltaTime);
 	}
-
-	std::cout << "DeltaTime: " << deltaTime << ", FPS: " << (1.0f / deltaTime) << "\n";
 }
 
 void Engine::Draw()
 {
+	// 레벨 그리기.
+	if (mainLevel != nullptr)
+	{
+		mainLevel->Draw();
+	}
 }
 
 void Engine::SavePreviouseKeyStates()
