@@ -27,7 +27,7 @@
     <ClCompile Include="Level\Level.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PreCompiledHeader.cpp">
+    <ClCompile Include="PreCompiledHeader\PreCompiledHeader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,13 @@
     <ClInclude Include="Level\Level.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PreCompiledHeader.h">
+    <ClInclude Include="PreCompiledHeader\PreCompiledHeader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RTTI.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
