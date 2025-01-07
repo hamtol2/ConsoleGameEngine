@@ -22,7 +22,7 @@ template<typename... T>
 void Log(const char* format, T&&... args)
 {
 	char buffer[1024];
-	snprintf(buffer, 1024, format, args);
+	snprintf(buffer, 1024, format, args ...);
 	std::cout << buffer << "\n";
 }
 
