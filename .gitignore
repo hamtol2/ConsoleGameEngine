@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+## Includes / Lib 폴더 제외.
+Includes/
+Lib/Engine.dll
+Lib/Engine.lib
+
 # User-specific files
 *.rsuser
 *.suo
