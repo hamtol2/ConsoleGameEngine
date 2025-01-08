@@ -1,5 +1,9 @@
 #pragma once
 
+// 작성자: 장세윤.
+// - 경고를 일부러 무시 시켰기 때문에 문제가 된다면 고쳐야 함.
+#pragma warning (disable : 4172)
+
 #include "Core.h"
 
 // 상속 관계에 있는 클래스 간의
