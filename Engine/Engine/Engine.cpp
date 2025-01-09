@@ -245,7 +245,7 @@ void Engine::Clear()
 	int height = 25;
 	for (int ix = 0; ix < height; ++ix)
 	{
-		Log("                              \n");
+		std::cout << "                               \n";
 	}
 
 	// 화면의 (0,0)으로 이동.

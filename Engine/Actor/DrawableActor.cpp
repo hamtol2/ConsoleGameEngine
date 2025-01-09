@@ -22,8 +22,8 @@ void DrawableActor::Draw()
 void DrawableActor::SetPosition(const Vector2& newPosition)
 {
 	// 이전의 위치를 먼저 지우기.
-	//Engine::Get().SetCursorPosition(position);
-	//Log(" ");
+	Engine::Get().SetCursorPosition(position);
+	Log(" ");
 
 	// 위치를 새로 옮기기.
 	Super::SetPosition(newPosition);
