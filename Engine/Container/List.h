@@ -43,6 +43,24 @@ public:
 		size++;
 	}
 
+	void Erase(int index)
+	{
+		// 예외 처리.
+		if (index < 0 || index >= size)
+		{
+			__debugbreak();
+		}
+
+		// 삭제한 데이터의 인덱스 다음 위치를 한칸 앞으로 모두 이동.
+		for (int ix = index; ix < size - 1; ++ix)
+		{
+			data[ix] = std::move(data[ix + 1]);
+		}
+
+		// 삭제 후 크기 줄이기.
+		--size;
+	}
+
 	int Size() const
 	{
 		return size;

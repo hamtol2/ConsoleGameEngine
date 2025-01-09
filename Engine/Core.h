@@ -23,7 +23,7 @@ void Log(const char* format, T&&... args)
 {
 	char buffer[1024];
 	snprintf(buffer, 1024, format, args ...);
-	std::cout << buffer << "\n";
+	std::cout << buffer;
 }
 
 // µð¹ö±ë ¿ëµµ.
