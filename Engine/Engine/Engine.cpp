@@ -100,7 +100,8 @@ void Engine::Run()
 			// 액터 정리 (삭제 요청된 액터들 정리).
 			if (mainLevel)
 			{
-				mainLevel->DestroyActor();
+				//mainLevel->DestroyActor();
+				mainLevel->ProcessAddedAndDestroyedActor();
 			}
 
 			// 프레임 활성화.
